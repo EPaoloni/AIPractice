@@ -9,7 +9,7 @@ pygame.font.init()
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
 
-# Cargo en variables las imagenes
+# Charging images
 BIRD_IMGS = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird1.png"))),
              pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird2.png"))),
              pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird3.png")))]
@@ -25,7 +25,7 @@ STAT_FONT = pygame.font.SysFont("comicsans", 50)
 
 
 class Bird:
-    # Seteo constantes del objeto
+    # Seting constants for bird class
     IMGS = BIRD_IMGS
     MAX_ROTATION = 25
     ROT_VEL = 20
@@ -50,22 +50,22 @@ class Bird:
     def move(self):
         self.tick_count += 1
 
-        # El tick se usa como medida de tiempo para la aceleracion, cuando se salta la velocidad esta en -10.5
-        # y va disminuyendo a medida que aumenta el tick_count
+        # We use tick for time measuring for calculating accelleration, when bird jumps the speed is setted to -10.5
+        # and then it starts descending while tick_count increases
         d = self.vel * self.tick_count + 1.5 * self.tick_count ** 2
 
-        # Velocidad maxima
+        # Maximum speed
         if d >= 16:
             d = 16
 
-        # Aumento un poco la velocidad de caida al llegar al pico de altura
+        # Increases the speed a bit as the bird reaches the max height of the jump
         if d < 0:
             d -= 2
 
-        # Aplico velocidad
+        # Speed applied
         self.y = self.y + d
 
-        # Rotacion de la imagen
+        # Image rotation
         if d < 0 or self.y < self.height + 50:
             if self.tilt < self.MAX_ROTATION:
                 self.tilt = self.MAX_ROTATION
@@ -76,7 +76,7 @@ class Bird:
     def draw(self, win):
         self.img_count += 1
 
-        # Animacion de los sprites
+        # Sprites animation
         if self.img_count < self.ANIMATION_TIME:
             self.img = self.IMGS[0]
         elif self.img_count < self.ANIMATION_TIME*2:
@@ -89,18 +89,18 @@ class Bird:
             self.img = self.IMGS[0]
             self.img_count = 0
 
-        # Si esta cayendo muestro solo la animacion estatica
+        # If bird is descending, only the static sprite is shown
         if self.tilt <= -80:
             self.img = self.IMGS[1]
             self.img_count = self.ANIMATION_TIME*2
 
-        # Rotacion de la imagen, modifico el centro para que rote sobre si misma
+        # Change the center of rotation for the image
         rotated_image = pygame.transform.rotate(self.img, self.tilt)
         new_rect = rotated_image.get_rect(
             center=self.img.get_rect(topleft=(self.x, self.y)).center)
         win.blit(rotated_image, new_rect.topleft)
 
-    # Mascara de colision
+    # Collision mask
     def get_mask(self):
         return pygame.mask.from_surface(self.img)
 
@@ -175,7 +175,7 @@ class Base:
 
 
 def draw_window(win, bird, pipes, base, score):
-    # Blit basicamente dibuja en pantalla
+    # Blit() draws in screen our image
     win.blit(BG_IMG, (0, 0))
 
     for pipe in pipes:
@@ -199,7 +199,7 @@ def main():
 
     win = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 
-    # Clock para manejar el framerate
+    # Clock to manage the framerate
     clock = pygame.time.Clock()
 
     # On update
