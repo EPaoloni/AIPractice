@@ -33,6 +33,16 @@ The steps for building a NEAT AI approach are:
       * Mutation
   4. Start over with a new generation from the new element
 
+### Fitness function
+
+We must think about the best fitness function for our problem.
+If we just use a linear function, when our parameters used for calculating the fitness get bigger and bigger, the difference between two high developed neurons will be tiny and when we have to choose a neuron to evolve it could be the less developed.
+
+So, for example, we could use an exponential function to make the difference between values more and more important as the fitness parameters get higher ones.
+
+### Pool selection based on fitness
+
+
 
 ## Neuroevolutional approach with a neural network developed by me
 
@@ -69,25 +79,3 @@ Daniel made several changes, like a slider to make game go faster, saving the be
 He managed to beat the game in 7 generations.
 
 ## Neuroevolution approach with tensorflow
-
-## NEAT APPROACH
-
-This one is from Tim videos.
-He also takes a neuroevolutional approach, and as expected it has the same structure that Daniel's approach.
-
-It consists in:
-  * Inputs
-  * Outputs
-  * Activation function
-  * Fitness Function
-  * Max generations
-
-We will have the same inputs we used in the previous approaches.
-
-Also the output will be the same.
-
-As activation function he uses TanH, in contraposition to Daniel who took the sigmoid function. I will do some research about activation functions.(Maybe)
-
-For fitness, he simple uses the distance traveled.
-
-We can decide a max number of generations to avoid looping over and over with bad generations of birds. He decided this number to be 30, but I'm not going to use it at all, I expect beating the game with almost the same amount of generations than Daniel.
