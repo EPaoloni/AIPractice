@@ -1,8 +1,8 @@
 import pygame
-import neat
 import time
 import os
 import random
+import keyboard
 
 pygame.font.init()
 
@@ -209,15 +209,19 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            if event.type == pygame.KEYDOWN:
+                print("jumping")
+                bird.jump()
 
-        #bird.move()
+        bird.move()
 
         rem = []
         add_pipe = False
 
         for pipe in pipes:
             if pipe.collide(bird):
-                pass
+                print("You lost")
+                main()
             
             if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                 rem.append(pipe)
@@ -233,9 +237,6 @@ def main():
 
         for r in rem:
             pipes.remove(r)
-
-        if bird.y + bird.img.get_height() >= 730:
-            pass
 
         base.move()
 
