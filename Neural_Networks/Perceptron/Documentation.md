@@ -43,6 +43,8 @@ Where `delta_weight` is the variable which we talked about previously.
 
 Taking in mind that a single case is not as important to modify our trained perceptron so drastically, we add a `Learning Rate` to our `new_weight` formula,
 making each particular value less important in order to prioritize the most cases.
+A high `Learning Rate` makes a good job at the beginning of the training, but makes it harder to find out the fine detailed answer.
+It would be a good decision if you use a high `Learning Rate` at the beginning and then you switch to a smaller one.
 ```python
 new_weight = actual_weight - delta_weight * learning_rate
 ```
@@ -51,3 +53,8 @@ And for example, our `Learning Rate` could be 0.1
 We have to modify the perceptron's weights in order to adjust them for the following data set, and the following guess.
 Finally, when our perceptron had been trained, we can use it in a real case with weights it had calculated when being trained.
 
+## Bias
+
+In the particular case where every input value is equals to 0, the weights of the perceptron will not matter at all,
+because the sum between every input multiplied by its weight will give 0.
+In order to fix that we will use a `Bias`, it is just an input with a value of 1, to be sure that the perceptron will always have a value to evaluate.

@@ -4,11 +4,12 @@ from helpers import sign
 
 class Perceptron:
     weights = []
+    bias = 1
 
     # Constructor
-    def __init__(self):
+    def __init__(self, inputQuantity):
         # Initialize the weights randomly
-        for i in range(0, 2):
+        for i in range(0, inputQuantity):
             self.weights.append(uniform(-1, 1))
 
     def guess(self, inputs):
