@@ -1,21 +1,44 @@
 from Matrix import Matrix
-import NeuralNetwork
+from NeuralNetwork import NeuralNetwork
+import json
+import random
+
+# Test with a XOR problem
+
+# Training data
+training_data = [
+    {
+        "inputs": [0, 0],
+        "targets": [0]
+    },
+    {
+        "inputs": [1, 0],
+        "targets": [1]
+    },
+    {
+        "inputs": [0, 1],
+        "targets": [1]
+    },
+    {
+        "inputs": [1, 1],
+        "targets": [0]
+    },
+]
 
 
-matrix1 = Matrix(2, 3)
-matrix1.randomize()
-print("Matrix1:\n" + matrix1.__str__())
-# matrix2 = Matrix(3, 2)
-# matrix2.randomize()
-# print("Matrix2:\n" + matrix2.__str__())
-# result = Matrix.matrixMultiply(matrix1, matrix2)
-# print("Multiplied matrix:\n" + result.__str__())
+nn = NeuralNetwork(2, 2, 1)
 
-# result = matrix1.transpose()
-# print("result:\n" + result.__str__())
+for i in range(0, 100000):
+  data = random.choice(training_data)
+  nn.train(data['inputs'], data['targets'])
 
-def doubleIt(x):
-  return x * 2
+guess1 = nn.feedForward([1,0])
+guess2 = nn.feedForward([0,1])
+guess3 = nn.feedForward([1,1])
+guess4 = nn.feedForward([0,0])
 
-matrix1.map(doubleIt)
-print("Matrix1:\n" + matrix1.__str__())
+
+print("guess1: " + guess1.__str__())
+print("guess2: " + guess2.__str__())
+print("guess3: " + guess3.__str__())
+print("guess4: " + guess4.__str__())
