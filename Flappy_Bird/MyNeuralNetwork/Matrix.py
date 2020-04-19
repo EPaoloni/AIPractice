@@ -43,7 +43,7 @@ class Matrix:
   def randomize(self):
     for i in range(0, self.rows):
       for j in range(0, self.cols):
-        self.data[i][j] = random.uniform(0, 1)
+        self.data[i][j] = random.random()
 
 
   @staticmethod
