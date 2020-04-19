@@ -36,9 +36,11 @@ The steps for building a NEAT AI approach are:
 ### Fitness function
 
 We must think about the best fitness function for our problem.
-If we just use a linear function, when our parameters used for calculating the fitness get bigger and bigger, the difference between two high developed neurons will be tiny and when we have to choose a neuron to evolve it could be the less developed.
+If we just use a linear function, when our parameters used for calculating the fitness gets bigger and bigger, the difference between two high developed neurons will be tiny and when we have to choose a neuron to evolve it could be the less developed.
 
 So, for example, we could use an exponential function to make the difference between values more and more important as the fitness parameters get higher ones.
+
+For genetic algorithms, we use fitness as a probability of the neural network of being picked to create another generation
 
 ### Pool selection based on fitness
 
