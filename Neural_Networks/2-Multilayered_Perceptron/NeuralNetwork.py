@@ -29,7 +29,7 @@ class NeuralNetwork:
 
     
   
-  def feedForward(self, input_array):
+  def predict(self, input_array):
     # Generating the hidden outputs
     inputs = Matrix.fromArray(input_array)
     hidden = Matrix.matrixMultiply(self.weights_ih, inputs)
