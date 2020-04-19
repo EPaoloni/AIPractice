@@ -1,5 +1,6 @@
 from MyNeuralNetwork.Matrix import Matrix
 from math import exp
+import random
 
 def sigmoid(x):
   return 1 / (1 + exp(-x))
@@ -25,11 +26,11 @@ class NeuralNetwork:
     self.bias_o = Matrix(self.output_nodes, 1)
     self.bias_o.randomize()
 
-    self.learning_rate = 1
+    self.learning_rate = 0.1
 
     
   
-  def feedForward(self, input_array):
+  def predict(self, input_array):
     # Generating the hidden outputs
     inputs = Matrix.fromArray(input_array)
     hidden = Matrix.matrixMultiply(self.weights_ih, inputs)
@@ -37,12 +38,25 @@ class NeuralNetwork:
     # Activation function
     hidden.map(sigmoid)
 
+
     # Generating the output of the NN
     output = Matrix.matrixMultiply(self.weights_ho, hidden)
     output.add(self.bias_o)
     output.map(sigmoid)
 
     return Matrix.toArray(output)
+
+
+  def mutate(self, rate):
+    def mutationFn(val):
+      if random.random() > rate:
+        return val + random.uniform(-0.1, 0.1)
+      else:
+        return val
+    self.weights_ih.map(mutationFn)
+    self.weights_ho.map(mutationFn)
+    self.bias_h.map(mutationFn)
+    self.bias_o.map(mutationFn)
 
   
   def train(self, input_array, target_array):
@@ -69,7 +83,6 @@ class NeuralNetwork:
     # Calculate Gradient Descent
     gradients = Matrix.mapMatrix(outputs, derivativeSigmoid)
 
-    # TODO: Aca gradients y output_errors son los dos de 2x1, ver esto bien
     gradients = Matrix.matrixMultiply(gradients, output_errors)
     gradients.scalarMultiply(self.learning_rate)
     self.bias_o.add(gradients)
