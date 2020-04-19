@@ -1,5 +1,6 @@
 import pygame
 import os
+from MyNeuralNetwork.NeuralNetwork import NeuralNetwork
 
 BIRD_IMAGES = [pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird1.png"))),
              pygame.transform.scale2x(pygame.image.load(os.path.join("imgs", "bird2.png"))),
@@ -16,6 +17,8 @@ class Bird:
     self.y = windowHeight / 2
     self.x = windowWidth / 4
     self.sprites = BIRD_IMAGES
+
+    self.brain = NeuralNetwork()
 
   def update(self):
     # Adds the speed to make it fall, if speed is negative, bird will fall
