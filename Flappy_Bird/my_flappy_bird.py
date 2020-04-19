@@ -1,8 +1,8 @@
 import pygame
 import os
 import random
-from classes.Bird import Bird
-from classes.Pipe import Pipe
+from Bird import Bird
+from Pipe import Pipe
 
 WIN_WIDTH = 500
 WIN_HEIGHT = 800
